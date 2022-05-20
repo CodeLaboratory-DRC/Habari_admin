@@ -26,7 +26,7 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
-    
+
     public function login(Request $request)
     {
         $validated = $request->validate([
@@ -48,21 +48,18 @@ class AuthController extends Controller
         return redirect()->back()->withInput($request->only('phone'))->with('error', 'mot de passe ou numéro de téléphone incorrect');
     }
 
-    /*public function profil()
+    public function profil()
     {
-        $profil = Account::select(
-            'accounts.id',
+        $user = User::select(
+            'users.id',
             'users.phone',
-            'accounts.email',
-            'accounts.name',
-            'accounts.gender',
-            'accounts.address'
+            'users.email',
+            'users.name',
         )
-            ->join('users', 'users.id', 'accounts.user_id')
-            ->where('user_id', auth()->user()->id)->first();
+            ->where('id', auth()->user()->id)->first();
 
-        return view('auth.profil', compact('profil'));
-    }*/
+        return view('auth.profil', compact('user'));
+    }
 
     public function logout()
     {
@@ -79,5 +76,4 @@ class AuthController extends Controller
 
         return redirect('/');
     }
-
 }

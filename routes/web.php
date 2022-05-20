@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('profil', [AuthController::class, 'getUser'])->name('profil');
+    Route::get('profil', [AuthController::class, 'profil'])->name('profil');
 
     Route::get('/', function () {
         return view('home');

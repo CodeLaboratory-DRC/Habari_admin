@@ -11,7 +11,7 @@
                 <span class="d-none d-md-inline-block">{{auth()->user()->name}}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-small">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route('profil')}}">
                     <i class="material-icons">&#xE7FD;</i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
