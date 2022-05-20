@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('categorie/{id}/delete', [CategorieController::class, 'destroy'])->name('categorie.delete');
 
+
+    Route::get('newses', [NewsController::class, 'index'])->name('newses.index');
+
+    Route::get('news', [NewsController::class, 'create'])->name('news');
+    Route::post('news', [NewsController::class, 'store'])->name('news.post');
 });
