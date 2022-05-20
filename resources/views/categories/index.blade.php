@@ -57,7 +57,7 @@
                                 @endforeach
                             @else
                                 <div class="alert alert-info text-center" alt="alert">
-                                    Aucune catéorie existante
+                                    Aucune catégorie existante
                                 </div>
                             @endif
 

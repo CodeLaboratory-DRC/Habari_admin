@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategorieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('home');
     });
+
+    Route::get('categorie', [CategorieController::class, 'create'])->name('categorie');
+    Route::post('categorie', [CategorieController::class, 'store'])->name('categorie.post');
+
+    Route::get('categories', [CategorieController::class, 'index'])->name('categories.index');
+
+    Route::get('categorie/{id}/delete', [CategorieController::class, 'destroy'])->name('categorie.delete');
+
 });

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Editor;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategorieController extends Controller
 {
@@ -14,7 +16,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::all();
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -24,7 +27,11 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+        $editor = Editor::select('editors.id')
+            ->join('users', 'users.id', '=', 'editors.users_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+        return view('categories.create', compact('editor'));
     }
 
     /**
@@ -35,7 +42,19 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:categories|max:45',
+            'overview' => 'required|max:255',
+            'editors_id' => 'required',
+
+        ]);
+
+        $categorie = Categorie::create($request->all());
+
+        if ($categorie) {
+            return redirect()->route('categories.index')->withSuccess('catégorie créer avec succès');
+        }
+        redirect()->back()->withInput()->withError('erreur à la création de la categorie ');
     }
 
     /**
@@ -78,8 +97,10 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy($categorie)
     {
-        //
+        $categorie = Categorie::findOrFail($categorie);
+        $categorie->delete();
+        return redirect()->route('categories.index')->with('alert', 'la catégorie a été supprimée');
     }
 }

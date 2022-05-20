@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Editor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,13 +13,20 @@ class AuthController extends Controller
     public function signin(Request $request)
     {
         $user = User::create([
-            'name' => 'admin',
+            'name' => 'becky',
             'email' => 'root@habari.org',
             'phone' => '0974944870',
             'role' => 'admin',
             'password' => Hash::make('admin243'),
         ]);
 
+        $editor = Editor::create([
+            'media_name' => 'becky news',
+            'overview' => 'un media pour vous informer',
+            'users_id' => $user->id
+        ]);
+        
+        
         return redirect('/');
     }
 
