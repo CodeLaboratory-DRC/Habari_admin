@@ -1,9 +1,14 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('styles/quill.snow.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/simplemde.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 @endpush
 @push('scripts')
     <script src="{{ asset('scripts/quill.min.js') }}"></script>
     <script src="{{ asset('scripts/app/app-blog-new-post.1.1.0.js') }}"></script>
+    <script src="{{ asset('scripts/simplemde.min.js') }}"></script>
 @endpush
 @extends('templates.app')
 @section('content')
@@ -19,9 +24,9 @@
             <div class="card card-small mb-3">
                 <div class="card-body">
                     <form class="add-new-post">
-                        <input class="form-control form-control-lg mb-3" id="titre" name="titre" type="text"
+                        <input class="form-control form-control-lg mb-3" id="titre" name="title" type="text"
                             placeholder="le titre de votre article">
-                        <div id="editor-container" class="add-new-post__editor mb-1"></div>
+                        <div id="editor" class="add-new-post__editor mb-1"></div>
                     </form>
                 </div>
             </div>
@@ -83,8 +88,7 @@
                                     <div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" name="category_id"
                                             id="category1" checked>
-                                        <label class="custom-control-label"
-                                            for="category1">{{ $categorie->name }}</label>
+                                        <label class="custom-control-label" for="category1">{{ $categorie->name }}</label>
                                     </div>
                                 @endforeach
                             @else
@@ -104,6 +108,10 @@
             function publish() {
                 console.log('value is ' + quill.getText());
             }
+        </script>
+        <script>
+            var simplemde = new SimpleMDE({ element: document.getElementById("MyID") });
+
         </script>
     @endpush
 @endsection
