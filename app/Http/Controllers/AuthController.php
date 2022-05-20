@@ -13,6 +13,7 @@ class AuthController extends Controller
     {
         $user = User::create([
             'name' => 'admin',
+            'email' => 'root@habari.org',
             'phone' => '0974944870',
             'role' => 'admin',
             'password' => Hash::make('admin243'),
@@ -21,6 +22,11 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    public function form_login()
+    {
+        return view('auth.login');
+    }
+    
     public function login(Request $request)
     {
         $validated = $request->validate([
