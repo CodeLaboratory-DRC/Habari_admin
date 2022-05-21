@@ -8,7 +8,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
                     <h6 class="m-0">Liste des catégorie</h6>
@@ -50,6 +50,10 @@
                                                 <a href='{{ url("categorie/$categorie->id/delete") }}'
                                                     class="btn btn-sm btn-danger text-white">
                                                     Supprimer
+                                                </a> &nbsp;
+                                                <a class="">
+                                                   <i class="material-icons"> vertical_split</i>
+                                                    <span class="d-none d-md-inline-block">{{ $categorie->name }}</span>
                                                 </a>
                                             </div>
                                         </td>
