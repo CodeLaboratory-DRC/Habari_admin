@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 
 /*
@@ -28,9 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('profil', [AuthController::class, 'profil'])->name('profil');
 
-    Route::get('/', function () {
-        return view('home');
-    });
+    Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::get('categorie', [CategorieController::class, 'create'])->name('categorie');
     Route::post('categorie', [CategorieController::class, 'store'])->name('categorie.post');
