@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                             <div class="my-auto ml-auto">
-                                <a class="btn btn-sm btn-primary" href="#">
+                                <a class="btn btn-sm btn-primary" href="newses/{{ $article->id }}/show">
                                     Lire
                                 </a>
                             </div>

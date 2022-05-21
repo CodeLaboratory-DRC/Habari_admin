@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('newses', [NewsController::class, 'index'])->name('newses.index');
 
+    Route::get('newses/{id}/show', [NewsController::class, 'show'])->name('newses.show');
+
     Route::get('news', [NewsController::class, 'create'])->name('news');
     Route::post('news', [NewsController::class, 'store'])->name('news.post');
 });
