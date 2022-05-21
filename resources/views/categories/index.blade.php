@@ -43,10 +43,10 @@
                                         <td>{{ $categorie->overview }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Action Frais">
-                                                {{--<a href='{{ url("categorie/$categorie->id/edit") }}'
+                                                <a href='{{ url("categories/$categorie->id/edit") }}'
                                                     class="btn btn-sm btn-primary">
                                                     Modifier
-                                                </a>--}}
+                                                </a> &nbsp;
                                                 <a href='{{ url("categorie/$categorie->id/delete") }}'
                                                     class="btn btn-sm btn-danger text-white">
                                                     Supprimer

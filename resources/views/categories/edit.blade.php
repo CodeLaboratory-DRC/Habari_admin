@@ -5,7 +5,7 @@
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle"></span>
-                <h3 class="page-title">Modifier la catégorie {{ $categorie->titre}}</h3>
+                <h3 class="page-title">Modifier la catégorie {{ $categorie->name }}</h3>
             </div>
         </div>
         <!-- End Page Header -->
@@ -20,14 +20,21 @@
                         <li class="list-group-item p-3">
                             <div class="row">
                                 <div class="col">
-                                    <form action="{{ route('categorie.update', $id) }}" method="POST">
+                                    <form action="{{ route('categories.update', $categorie) }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="editors_id" value="{{ $editor->id }}">
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
-                                                <label for="title">Titre </label>
-                                                <input type="text" name="titre" class="form-control" id="title" placeholder="HTML"
-                                                    value="{{ old('titre') }}">
+                                                <label for="title">Nom </label>
+                                                <input type="text" name="name" class="form-control" id="title"
+                                                    placeholder="HTML" value="{{ $categorie->name }}">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="title">Description </label>
+                                                <input type="text" name="overview" class="form-control" id="title"
+                                                    placeholder="HTML" value="{{ $categorie->overview }}">
                                             </div>
                                         </div>
                                         <div class="form-group">

@@ -47,13 +47,13 @@
              </li>
 
              <li class="nav-item">
-                 <a class="nav-link " href="#">
+                 <a class="nav-link " href="{{ route('newses.index')}}">
                      <i class="material-icons">vertical_split</i>
                      <span>Articles</span>
                  </a>
              </li>
              <li class="nav-item">
-                 <a class="nav-link " href="#">
+                 <a class="nav-link " href="{{ route('news')}}">
                      <i class="material-icons">note_add</i>
                      <span>Ajouter un article</span>
                  </a>

@@ -74,9 +74,15 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit($categorie)
     {
-        //
+        $editor = Editor::select('editors.id')
+            ->join('users', 'users.id', '=', 'editors.users_id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+        $categorie = Categorie::findOrFail($categorie);
+
+        return view('categories.edit', compact('categorie','editor'));
     }
 
     /**
@@ -86,9 +92,21 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, $categorie)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:45',
+            'overview' => 'required|max:255',
+        ]);
+
+        $categorie = Categorie::findOrFail($categorie);
+        
+        $categorie->update($request->all());
+
+        if ($categorie) {
+            return redirect()->route('categories.index')->withSuccess('catégorie modifiée avec succès');
+        }
+        redirect()->back()->withInput()->withError('erreur à la modification de la categorie ');
     }
 
     /**
