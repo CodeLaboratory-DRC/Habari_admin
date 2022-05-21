@@ -63,6 +63,7 @@ class AuthController extends Controller
             'users.phone',
             'users.email',
             'users.name',
+            'users.role',
         )
             ->where('id', auth()->user()->id)->first();
 

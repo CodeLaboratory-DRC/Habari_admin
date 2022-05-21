@@ -12,20 +12,25 @@
                     <div class="mb-3 mx-auto">
                         <img class="rounded-circle" src="images/user_icon.png" alt="User Avatar" width="110">
                     </div>
-                    <h4 class="mb-0">{{ $user->name}}</h4>
-                    <span class="text-muted d-block mb-2">{{ $user->role}}</span>
+                    <h4 class="mb-0">{{ $user->name }}</h4>
+                    <span class="text-muted d-block mb-2"></span>
                 </div>
                 <ul class="list-group list-group-flush">
-                    
+
                     <li class="list-group-item p-4">
-                        <strong class="text-muted d-block mb-2">Description</strong>
-                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta
-                            qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi
-                            cumque?</span>
+                        Nom: {{ $user->name }}
                     </li>
+                    <li class="list-group-item p-4">
+                        Téléphone: {{ $user->phone }}
+                    </li>
+                    <li class="list-group-item p-4">
+                        Adresse mail: {{ $user->email }}
+                    </li>
+                    <li class="list-group-item p-4">
+                        Accès: {{ $user->role }}
                 </ul>
             </div>
         </div>
-        
+
     </div>
 @endsection
