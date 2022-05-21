@@ -1,15 +1,7 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('styles/quill.snow.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('styles/simplemde.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 @endpush
-@push('scripts')
-    <script src="{{ asset('scripts/quill.min.js') }}"></script>
-    <script src="{{ asset('scripts/app/app-blog-new-post.1.1.0.js') }}"></script>
-    <script src="{{ asset('scripts/simplemde.min.js') }}"></script>
-@endpush
+
 @extends('templates.app')
 @section('content')
     <div class="page-header row no-gutters py-4">
@@ -24,57 +16,17 @@
             <div class="card card-small mb-3">
                 <div class="card-body">
                     <form class="add-new-post">
+                        @csrf
                         <input class="form-control form-control-lg mb-3" id="titre" name="title" type="text"
                             placeholder="le titre de votre article">
-                        <div id="editor" class="add-new-post__editor mb-1"></div>
+                        <textarea name="content" id="editor" cols="30" rows="10"></textarea>
+
                     </form>
                 </div>
             </div>
             <!-- / Add New Post Form -->
         </div>
         <div class="col-lg-3 col-md-12">
-            <!-- Post Overview -->
-            <div class='card card-small mb-3'>
-                <div class="card-header border-bottom">
-                    <h6 class="m-0">Actions</h6>
-                </div>
-                <div class='card-body p-0'>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item p-3">
-                            <span class="d-flex mb-2">
-                                <i class="material-icons mr-1">flag</i>
-                                <strong class="mr-1">Status:</strong> Article
-                                {{-- <a class="ml-auto" href="#">Edit</a> --}}
-                            </span>
-                            {{-- <span class="d-flex mb-2">
-                                <i class="material-icons mr-1">visibility</i>
-                                <strong class="mr-1">Visibility:</strong>
-                                <strong class="text-success">Public</strong>
-                                <a class="ml-auto" href="#">Edit</a>
-                            </span>
-                            <span class="d-flex mb-2">
-                                <i class="material-icons mr-1">calendar_today</i>
-                                <strong class="mr-1">Schedule:</strong> Now
-                                <a class="ml-auto" href="#">Edit</a>
-                            </span>
-                            <span class="d-flex">
-                                <i class="material-icons mr-1">score</i>
-                                <strong class="mr-1">Readability:</strong>
-                                <strong class="text-warning">Ok</strong>
-                            </span> --}}
-                        </li>
-                        <li class="list-group-item d-flex px-3">
-                            {{-- <button class="btn btn-sm btn-outline-accent">
-                                <i class="material-icons">save</i> Save Draft
-                            </button> --}}
-                            <button class="btn btn-sm btn-accent ml-auto" type="submit" onclick="publish()">
-                                <i class="material-icons">file_copy</i> Publier
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- / Post Overview -->
             <!-- Post Overview -->
             <div class='card card-small mb-3'>
                 <div class="card-header border-bottom">
@@ -101,16 +53,85 @@
                 </div>
             </div>
             <!-- / Post Overview -->
+            <!-- Post Overview -->
+            <div class='card card-small mb-3'>
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Actions</h6>
+                </div>
+                <div class='card-body p-0'>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex">
+                            <button class="btn btn-sm btn-accent" id="publish">
+                                <i class="material-icons">file_copy</i> Publier
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- / Post Overview -->
         </div>
     </div>
     @push('scripts')
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <script>
-            function publish() {
-                console.log('value is ' + quill.getText());
-            }
-        </script>
-        <script>
-            var simplemde = new SimpleMDE({ element: document.getElementById("MyID") });
+            
+            var simplemde = new SimpleMDE({
+                element: document.getElementById("editor"),
+                autoDownloadFontAwesome: true,
+                status: false
+            });
+            $('#publish').click(function () {
+                var titre = $('#titre').val();
+                var content = simplemde.value();
+                var category_id = $('input[name="category_id"]:checked').val();
+                if (titre == '') {
+                    swal({
+                        title: "Erreur",
+                        text: "Veuillez saisir un titre",
+                        icon: "error",
+                        button: "OK",
+                    });
+                } else if (content == '') {
+                    swal({
+                        title: "Erreur",
+                        text: "Veuillez saisir un contenu",
+                        icon: "error",
+                        button: "OK",
+                    });
+                } else {
+                    $.ajax({
+                        url: "{{ route('news.post') }}",
+                        type: "POST",
+                        data: {
+                            title: titre,
+                            content: content,
+                            category_id: category_id,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function (data) {
+                            swal({
+                                title: "Succès",
+                                text: "Votre article a été publié",
+                                icon: "success",
+                                button: "OK",
+                            }).then(function () {
+                                window.location.href = "/";
+                            });
+                        },
+                        error: function (data) {
+                            swal({
+                                title: "Erreur",
+                                text: "Une erreur est survenue",
+                                icon: "error",
+                                button: "OK",
+                            });
+                        }
+                    });
+                }
+            });
 
         </script>
     @endpush

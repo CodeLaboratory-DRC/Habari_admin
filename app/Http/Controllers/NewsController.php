@@ -38,7 +38,27 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        $news = new News();
+        $pub_date = date('Y-m-d H:i:s');
+
+        $news->title = $request->title;
+        $news->content = $request->content;
+        $news->pub_date = $pub_date;
+        $news->status = 'active';
+        $news->overview = substr($request->content, 0, 100);
+        // $news->categorie_id = $request->categorie_id;
+        $news->save();
+
+        // $news->categories()->attach($request->categorie_id);
+
+        return 'success';
+
+        //return redirect()->route('news.index')->with('success', 'News created successfully');
     }
 
     /**

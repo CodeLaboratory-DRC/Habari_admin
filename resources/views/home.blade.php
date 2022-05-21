@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 ">
+        <div class="col-md-3">
             <div class="stats-small stats-small--1 card card-small">
                 <div class="card-body p-0 d-flex">
                     <div class="d-flex flex-column m-auto">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 ">
+        <div class="col-md-3">
             <div class="stats-small stats-small--1 card card-small">
                 <div class="card-body p-0 d-flex">
                     <div class="d-flex flex-column m-auto">
@@ -39,13 +39,29 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 ">
+        <div class="col-md-3">
             <div class="stats-small stats-small--1 card card-small">
                 <div class="card-body p-0 d-flex">
                     <div class="d-flex flex-column m-auto">
                         <div class="stats-small__data text-center">
                             <span class="stats-small__label text-uppercase">Visites</span>
                             <h6 class="stats-small__value count my-3">15k</h6>
+                        </div>
+                        <div class="stats-small__data">
+                            <span class="text-center">total</span>
+                        </div>
+                    </div>
+                    <canvas height="120" class="blog-overview-stats-small-1"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-small stats-small--1 card card-small">
+                <div class="card-body p-0 d-flex">
+                    <div class="d-flex flex-column m-auto">
+                        <div class="stats-small__data text-center">
+                            <span class="stats-small__label text-uppercase">Abonnements en cours</span>
+                            <h6 class="stats-small__value count my-3">2k</h6>
                         </div>
                         <div class="stats-small__data">
                             <span class="text-center">total</span>
@@ -76,10 +92,10 @@
                         <div class="card-footer border-top d-flex">
                             <div class="card-post__author d-flex">
                                 <a href="#" class="card-post__author-avatar card-post__author-avatar--small"
-                                    style="background-image: url('images/user_icon.png');"></a>
+                                    style="background-image: url('images/eye.png');">
+                                </a>
                                 <div class="d-flex flex-column justify-content-center ml-3">
-                                    <span class="card-post__author-name">{{ auth()->user()->name }}</span>
-                                    <small class="text-muted">22.05.2022</small>
+                                    <span class="card-post__author-name">5k vues</span>
                                 </div>
                             </div>
                             <div class="my-auto ml-auto">
@@ -144,10 +160,9 @@
                             <div class="card-footer border-top d-flex">
                                 <div class="card-post__author d-flex">
                                     <a href="#" class="card-post__author-avatar card-post__author-avatar--small"
-                                        style="background-image: url('images/user_icon.png');"></a>
+                                        style="background-image: url('images/eye.png');"></a>
                                     <div class="d-flex flex-column justify-content-center ml-3">
-                                        <span class="card-post__author-name">{{ auth()->user()->name }}</span>
-                                        <small class="text-muted">22.05.2022</small>
+                                        <span class="card-post__author-name">1k vues</span>
                                     </div>
                                 </div>
                                 <div class="my-auto ml-auto">
