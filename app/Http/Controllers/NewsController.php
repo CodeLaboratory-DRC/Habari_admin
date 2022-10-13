@@ -51,10 +51,10 @@ class NewsController extends Controller
         $news->pub_date = $pub_date;
         $news->status = 'active';
         $news->overview = substr($request->content, 0, 100);
-        // $news->categorie_id = $request->categorie_id;
+        $news->category_id = $request->category_id;
         $news->save();
 
-        // $news->categories()->attach($request->categorie_id);
+        // $news->categories()->attach($request->category_id);
 
         return 'success';
 
@@ -67,7 +67,7 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function show( $news)
+    public function show($news)
     {
         $news = News::findOrFail($news);
         return view('news.show', compact('news'));
